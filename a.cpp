@@ -454,7 +454,7 @@ int main(int argc, char *argv[])
 
     }else if(argc == 5)
     {
-        if(argv[1][0] == '-' && argv[1][1] == 'h')
+        if(argv[1][0] == '-' && (argv[1][1]=='h' || argv[1][1]=='H'|| argv[1][1]=='g' || argv[1][1]=='G') )
         {
             int month = atoi(argv[2]);
             int date  = atoi(argv[3]);
@@ -478,7 +478,7 @@ int main(int argc, char *argv[])
 
 
 
-        }else if(argv[1][0] == '-' && argv[1][1] == 'c')
+        }else if(argv[1][0] == '-' && ( argv[1][1]=='c' || argv[1][1]=='C' || argv[1][1]=='j' || argv[1][1]=='J') )
         {
             int month = atoi(argv[2]);
             int date  = atoi(argv[3]);
@@ -511,7 +511,29 @@ int main(int argc, char *argv[])
 
     }else
     {
-        cout<<"Usage: "<<argv[0]<<" -h|-c month date year"<<endl;
+        
+        cout<<"----------------------------------------"<<endl;
+        cout<<"Calendar Date Convertion Tool"<<endl;
+        cout<<"Civil(Gregorian) <-> Hebrew(Jewish)"<<endl;
+        cout<<endl;
+        cout<<"Usage:"<<endl<<endl;
+        cout<<"<No arguments> : Display today's date in both calendars"<<endl;
+        cout<<"Local timezone"<<endl;
+        cout<<endl;
+        cout<<"-h, -H, -j, -J : Convert Civil(Gregorian) to Hebrew Calendar"<<endl;
+        cout<<endl;
+        cout<<"-c, -C, -g, -G : Convert Hebrew Calendar to Civil(Gregorian)"<<endl;
+        cout<<"Tishrei is Month 1, Adar II is month 7 in leap years, month 6 in non-leap years"<<endl;
+        cout<<endl;
+        cout<<"Note: Hebrew day transition was done during sunset.";
+        cout<<"No fixed time of transition, it depends on the location and season."<<endl;
+        cout<<endl;
+        cout<<"Example:"<<endl;
+        cout<<argv[0]<<" -h 10 1 2024 : Convert October 1, 2024 to Hebrew Calendar"<<endl;
+        cout<<argv[0]<<" -c 1 1 5785 : Convert 1 Tishrei 5785 to Civil Calendar"<<endl;
+        cout<<endl;
+        cout<<"-----------------------------------------"<<endl;
+        
         res=P_ERR_VAL;
     };
 
