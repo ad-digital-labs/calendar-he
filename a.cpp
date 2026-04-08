@@ -102,7 +102,18 @@ static long he_tishrei1(long y)
 // determine the hebrew year is leap year
 bool is_hebrew_leap_year(int year)
 {
-    return ((7 * year + 1) % 19) < 7;
+    bool res;
+    if(  ( ( (7 * year) + 1) % 19) < 7  )
+    {
+        res=true;
+    }
+    else
+    {
+        res=false;
+    };
+
+    return res;
+
 };
 
 struct caltime::calendar caltime::cal_get_ce_today()
@@ -278,7 +289,7 @@ int display_today()
 
     cout<<"Hebrew: ";
     cout<<cal.str_day_he[cal_he.day-1]<<" "<<cal.str_day_he_eng[cal_he.day-1]<<" - ";
-    if( ((7 * cal_he.year + 1) % 19) < 7 )
+    if(is_hebrew_leap_year(cal_he.year))
         cout<<cal.str_month_he_leap[cal_he.mo-1]<<" "<<cal.str_month_he_leap_eng[cal_he.mo-1]<<" ";
     else
         cout<<cal.str_month_he[cal_he.mo-1]<<" "<<cal.str_month_he_eng[cal_he.mo-1]<<" ";
@@ -330,7 +341,7 @@ int display_he(int month, int date, int year)
 
             cout<<"Hebrew: ";
             cout<<cal.str_day_he[cal_he.day-1]<<" "<<cal.str_day_he_eng[cal_he.day-1]<<" - ";
-            if( ((7 * cal_he.year + 1) % 19) < 7 )
+            if(is_hebrew_leap_year(cal_he.year))
                 cout<<cal.str_month_he_leap[cal_he.mo-1]<<" "<<cal.str_month_he_leap_eng[cal_he.mo-1]<<" ";
             else
                 cout<<cal.str_month_he[cal_he.mo-1]<<" "<<cal.str_month_he_eng[cal_he.mo-1]<<" ";
@@ -386,10 +397,15 @@ int display_ce(int month, int date, int year)
             cout<<"----------------------------------------"<<endl;
             cout<<"Hebrew: ";
             cout<<cal.str_day_he[cal_ce.day-1]<<" "<<cal.str_day_he_eng[cal_ce.day-1]<<" - ";
-            if( ((7 * cal_he.year + 1) % 19) < 7 )
+
+            if(is_hebrew_leap_year(cal_he.year))
+            {
                 cout<<cal.str_month_he_leap[cal_he.mo-1]<<" "<<cal.str_month_he_leap_eng[cal_he.mo-1]<<" ";
-            else
+            }else
+            {
                 cout<<cal.str_month_he[cal_he.mo-1]<<" "<<cal.str_month_he_eng[cal_he.mo-1]<<" ";
+            };
+
             cout<<cal_he.date<<", ";
             cout<<cal_he.year<<endl;
 
